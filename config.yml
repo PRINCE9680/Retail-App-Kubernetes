@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: { { .Values.configMap.name } }
+data:
+  MONGO_INITDB_DATABASE: "myDatabase"
+  PORT: "3130"

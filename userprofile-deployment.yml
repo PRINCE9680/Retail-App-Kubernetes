@@ -1,30 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: userprofile-deployment
+  name: { { .Values.user.names.profile } }
+  namespace: { { .Values.namespace } }
 spec:
-  replicas: 2
+  replicas: { { .Values.user.replicas } }
   selector:
     matchLabels:
-      app: userprofile
+      app: { { .Values.user.app } }
   template:
     metadata:
       labels:
-        app: userprofile
+        app: { { .Values.user.app } }
     spec:
       containers:
-      - name: usernode-js
-        image: dockerimageyour:latest
-        ports:
-        - containerPort: 3130  # Change to match your app's port
-        env:
-        - name: MONGODB_URI
-          value: "mongodb://mongodb:27017/myDatabase"  # Match this to your MongoDB deployment
-        - name: SESSION_SECRET
-          value: "1234"
-        - name: EMAIL_USER
-          value: "chagantyteja2502@gmail.com"
-        - name: EMAIL_PASS
-          value: "yxoq bjuk rdnt alzp"
-        - name: PORT
-          value: "3130"
+        - name: { { .Values.user.names.container } }
+          image: "{{ .Values.user.image.repository }}:{{ .Values.user.image.tag }}"
+          ports:
+            - containerPort: { { .Values.user.port } } # Change to match your app's port
+          envFrom:
+            - configMapRef:
+                name: { { .Values.configMap.name } }
+            - secretRef:
+                name: { { .Values.secret.name } }

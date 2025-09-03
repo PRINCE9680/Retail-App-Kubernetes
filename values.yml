@@ -1,0 +1,24 @@
+namespace: prince
+mongodb:
+  name: mongodb
+  port: 27017
+  replicas: 1
+  image:
+    repository: mongo
+    tag: latest
+user:
+  names:
+    nodejs: usernode-js-service
+    profile: userprofile-deployment
+    container: usernode-js
+  type: LoadBalancer
+  port: 3130
+  app: userprofile
+  replicas: 2
+  image:
+    repository: saiteja2502/userprofileretail
+    tag: latest
+secret:
+  name: app-secrets
+configMap:
+  name: app-config
