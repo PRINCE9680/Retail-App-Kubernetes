@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: { { .Values.configMap.name } }
 data:
-  MONGO_INITDB_DATABASE: "myDatabase"
-  PORT: "3130"
+  MONGO_INITDB_DATABASE: { { .Values.configMap.databse } }
+  PORT: { { .Values.user.port } }
