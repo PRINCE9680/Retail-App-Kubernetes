@@ -20,5 +20,6 @@ user:
     tag: latest
 secret:
   name: app-secrets
+  type: Opaque
 configMap:
   name: app-config
